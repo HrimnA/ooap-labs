@@ -1,4 +1,3 @@
-# Клас для опису автомобіля
 class Car:
     def __init__(self):
         self.engine_type = None
@@ -20,7 +19,6 @@ class Car:
                 f"Обшивка салону: {self.interior}\n"
                 f"Ціна: {self.price} грн")
 
-# Абстрактний будівельник для автомобіля
 class CarBuilder:
     def __init__(self):
         self.car = Car()
@@ -55,7 +53,6 @@ class CarBuilder:
     def get_car(self):
         return self.car
 
-# Конкретний будівельник для кожної комплектації
 class BasicCarBuilder(CarBuilder):
     def set_engine_type(self):
         self.car.engine_type = "Бензиновий"
@@ -142,10 +139,9 @@ class PremiumCarBuilder(CarBuilder):
     def set_price(self):
         self.car.price = 700000
 
-# Будівельник для спортивної комплектації
 class SportCarBuilder(CarBuilder):
     def set_engine_type(self):
-        self.car.engine_type = "Бензиновий турбований"
+        self.car.engine_type = "Бензиновий"
 
     def set_engine_volume(self):
         self.car.engine_volume = 3.0
@@ -171,7 +167,6 @@ class SportCarBuilder(CarBuilder):
     def set_price(self):
         self.car.price = 900000
 
-# Директор, який керує процесом будівництва (залишається незмінним)
 class CarDirector:
     def __init__(self, builder):
         self.builder = builder

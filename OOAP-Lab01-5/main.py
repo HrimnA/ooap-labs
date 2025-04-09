@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-# Інтерфейс для адреси
 class AddressInterface(ABC):
     @abstractmethod
     def set_address(self, street, city, zipcode):
@@ -10,7 +9,6 @@ class AddressInterface(ABC):
     def get_address(self):
         pass
 
-# Клас для адреси, що реалізує інтерфейс
 class Address(AddressInterface):
     def __init__(self, street='', city='', zipcode=''):
         self._street = street
@@ -25,11 +23,10 @@ class Address(AddressInterface):
     def get_address(self):
         return f'{self._street}, {self._city}, {self._zipcode}'
 
-# Клас для особи
 class Person:
     def __init__(self, name, address_delegate):
         self._name = name
-        self._address_delegate = address_delegate  # Делегування об'єкту адреси
+        self._address_delegate = address_delegate
 
     def set_address(self, street, city, zipcode):
         self._address_delegate.set_address(street, city, zipcode)
@@ -43,7 +40,6 @@ class Person:
     def set_name(self, name):
         self._name = name
 
-# Клас для записної книжки
 class AddressBook:
     def __init__(self):
         self._entries = []
@@ -73,7 +69,6 @@ class AddressBook:
         for index, person in enumerate(self._entries):
             print(f"{index}: {person.get_person_info()}")
 
-    # Автоматичне наповнення кількома записами
     def auto_fill(self):
         sample_data = [
             ("Ivan Koval", Address("Shevchenko St", "Kyiv", "01001")),
@@ -86,7 +81,6 @@ class AddressBook:
             person = Person(name, address)
             self.add_person(person)
 
-# Функція для додавання нової особи
 def create_person():
     try:
         name = input("Enter person's name: ")
@@ -103,7 +97,6 @@ def create_person():
         print(f"Error: {ve}")
         return None
 
-# Функція для отримання індексу з валідацією введення
 def get_valid_index(prompt, max_index):
     try:
         index = int(input(prompt))
@@ -117,7 +110,6 @@ def get_valid_index(prompt, max_index):
         print(f"Error: {ie}")
         return None
 
-# Меню програми
 def menu():
     address_book = AddressBook()
 
@@ -133,13 +125,11 @@ def menu():
         choice = input("Choose an option: ")
 
         if choice == '1':
-            # Додавання нової особи
             person = create_person()
             if person:
                 address_book.add_person(person)
                 print("Person added successfully.")
         elif choice == '2':
-            # Редагування особи
             address_book.show_all_entries()
             if len(address_book._entries) == 0:
                 continue
@@ -150,7 +140,6 @@ def menu():
                 city = input("Enter new city (leave empty to keep current): ")
                 zipcode = input("Enter new zipcode (leave empty to keep current): ")
 
-                # Якщо користувач ввів всі поля адреси, тоді редагуємо адресу
                 if street and city and zipcode:
                     address_book.edit_person(index, name, street, city, zipcode)
                 else:
@@ -158,7 +147,6 @@ def menu():
 
                 print("Person edited successfully.")
         elif choice == '3':
-            # Видалення особи
             address_book.show_all_entries()
             if len(address_book._entries) == 0:
                 continue
@@ -167,19 +155,15 @@ def menu():
                 address_book.delete_person(index)
                 print("Person deleted successfully.")
         elif choice == '4':
-            # Показати всі записи
             address_book.show_all_entries()
         elif choice == '5':
-            # Автоматичне наповнення книги прикладами
             address_book.auto_fill()
             print("Address book has been auto-filled with sample data.")
         elif choice == '6':
-            # Вихід з програми
             print("Exiting...")
             break
         else:
             print("Invalid option. Please try again.")
 
-# Запуск програми
 if __name__ == "__main__":
     menu()

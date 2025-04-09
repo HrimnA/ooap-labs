@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from math import pi, sqrt
 
+
 class Shape(ABC):
     def __init__(self, color, center_x, center_y):
         self.color = color
@@ -82,7 +83,6 @@ def user_interface():
     print("2 - Прямокутник")
     print("3 - Трикутник")
     choice = input("Ваш вибір: ")
-
     color = input("Введіть колір фігури: ")
     center_x = float(input("Введіть координату X центру фігури: "))
     center_y = float(input("Введіть координату Y центру фігури: "))
@@ -109,6 +109,7 @@ def user_interface():
         return
 
     shape.draw()
+
 
 if __name__ == "__main__":
     user_interface()

@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-# Абстрактний клас для телефонів
 class Phone(ABC):
     @abstractmethod
     def get_price(self):
@@ -10,28 +9,25 @@ class Phone(ABC):
     def get_delivery_time(self):
         pass
 
-# Конкретні класи для телефонів, виготовлених у різних країнах
 class USPhone(Phone):
     def get_price(self):
-        return 1000
+        return 780
 
     def get_delivery_time(self):
-        return 7  # доставка в днях
+        return 5
 
 class EastPhone(Phone):
     def get_price(self):
-        return 700
+        return 520
 
     def get_delivery_time(self):
-        return 14  # доставка в днях
+        return 17
 
-# Абстрактний клас фабрики
 class PhoneFactory(ABC):
     @abstractmethod
     def create_phone(self):
         pass
 
-# Конкретні фабрики для телефонів, вироблених у різних країнах
 class USPhoneFactory(PhoneFactory):
     def create_phone(self):
         return USPhone()
@@ -40,7 +36,6 @@ class EastPhoneFactory(PhoneFactory):
     def create_phone(self):
         return EastPhone()
 
-# Клас для магазину, який працює з фабриками
 class PhoneStore:
     def __init__(self, factory: PhoneFactory):
         self.factory = factory
@@ -51,7 +46,6 @@ class PhoneStore:
         delivery_time = phone.get_delivery_time()
         return price, delivery_time
 
-# Основна логіка програми
 def main():
     print("Select the country of manufacture:")
     print("1. USA")

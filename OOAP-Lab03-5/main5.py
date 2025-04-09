@@ -2,6 +2,7 @@ import copy
 from abc import ABC, abstractmethod
 from datetime import date
 
+
 class Resident:
     def __init__(self, name, birth_date, faculty, group, education_form):
         self.name = name
@@ -17,6 +18,7 @@ class Resident:
 
     def calculate_rent(self):
         return 500 if self.education_form == "держзамовлення" else 1000
+
 
 class Room(ABC):
     def __init__(self, room_type, max_residents):
@@ -41,6 +43,7 @@ class Room(ABC):
             room_info += f"{resident}\nКвартплата: {resident.calculate_rent()} грн\n"
         return room_info
 
+
 class DoubleRoom(Room):
     def __init__(self):
         super().__init__("Двомісна кімната", 2)
@@ -48,12 +51,14 @@ class DoubleRoom(Room):
     def clone(self):
         return copy.deepcopy(self)
 
+
 class TripleRoom(Room):
     def __init__(self):
         super().__init__("Тримісна кімната", 3)
 
     def clone(self):
         return copy.deepcopy(self)
+
 
 class DormitoryManager:
     def __init__(self):
@@ -68,6 +73,7 @@ class DormitoryManager:
                 file.write(str(room))
                 file.write("\n" + "-"*40 + "\n")
 
+
 if __name__ == "__main__":
     double_room_prototype = DoubleRoom()
     triple_room_prototype = TripleRoom()
@@ -75,12 +81,12 @@ if __name__ == "__main__":
     room1 = double_room_prototype.clone()
     room2 = triple_room_prototype.clone()
 
-    room1.add_resident(Resident("Іваненко Іван Іванович", date(2000, 5, 15), "Фізичний", "ФІ-1", "держзамовлення"))
-    room1.add_resident(Resident("Петренко Петро Петрович", date(2001, 3, 10), "Фізичний", "ФІ-1", "контракт"))
+    room1.add_resident(Resident("Іван", date(2000, 5, 15), "КомпНауки", "КН-1", "держзамовлення"))
+    room1.add_resident(Resident("Петро", date(2001, 3, 10), "КомпНауки", "КН-1", "контракт"))
 
-    room2.add_resident(Resident("Сидоренко Сидір Сидорович", date(2000, 9, 25), "Хімічний", "ХМ-2", "держзамовлення"))
-    room2.add_resident(Resident("Мельник Микола Миколайович", date(2001, 11, 5), "Хімічний", "ХМ-2", "контракт"))
-    room2.add_resident(Resident("Коваль Костянтин Костянтинович", date(1999, 7, 20), "Хімічний", "ХМ-2", "контракт"))
+    room2.add_resident(Resident("Сидір", date(2000, 9, 25), "КомпІнженер", "КІ-2", "держзамовлення"))
+    room2.add_resident(Resident("Микола", date(2001, 11, 5), "КомпІнженер", "КІ-2", "контракт"))
+    room2.add_resident(Resident("Костянтин", date(1999, 7, 20), "КомпІнженер", "КІ-3", "контракт"))
 
     manager = DormitoryManager()
     manager.add_room(room1)

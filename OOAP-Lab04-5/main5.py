@@ -30,9 +30,6 @@ class Skype:
 
 if __name__ == "__main__":
     camera = VideoCamera()
-
     video_call = VideoCallAdapter(camera)
-
     skype = Skype(video_call)
-
     print(skype.start_call())
