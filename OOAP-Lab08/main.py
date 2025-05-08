@@ -36,4 +36,4 @@ user3 = Participant("Charlie", chat)
 
 user1.send_message("Bob", "Привіт, Боб!")
 user2.send_message("Alice", "Привіт, Аліса!")
-user3.send_message("David", "Ти тут?")  # Отримуємо повідомлення, що David не в чаті
+user3.send_message("David", "Ти тут?")
